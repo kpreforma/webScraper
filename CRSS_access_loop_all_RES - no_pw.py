@@ -44,7 +44,7 @@ if int(dayformat1) < 10:
 # print(dayformat1)
 
 # Set data dump directory
-strBCQfolderpath = "G:\\My Drive\\BCQ Revamp\\" + date1 + "\\CRSS Load MQ"
+strBCQfolderpath = "C:\\MQMasterFilePath"
 
 # Set Firefox driver properties
 profile = webdriver.FirefoxProfile()
@@ -56,22 +56,13 @@ profile.set_preference("browser.download.dir", strBCQfolderpath)
 
 # Set participants list [Participant ID, username, password]
 strAllParticipants = [
-                        ["FNPC", "fnpc_01", "------"],
-                        ["GCGI", "gcgi_08", "-------!"],
-                        ["FGHPC", "fghpc_01", "--------"],
-                        ["GCGIRES", "gcgires_01", "---------"],
-                        ["FGHSNG", "fghsng_01", "--------"],
-                        ["PMPC", "pmpc_01", "--------"],
-                        ["BGI", "bgi_01", "---------"],
-                        ["EDC", "edc_01", "--------"],
-                        ["BGIRES", "bgires_01", "--------"],
-                        ["FGESRES", "fgesres_01", "-----------"]
+                        ["sampleID1", "userID1", "pw1"],
+                        ["sampleID2", "userID2", "pw2"]
                       ]
 
 # Initiate webdriver object instance and access CRSS website
 driver = webdriver.Firefox(firefox_profile=profile)
 strlogin = "https://crss-main.wesmsys.local/uaa/login?logout"
-# https://crss-main.wesmsys.local/uaa/login
 pagewait(strlogin, "login", "link")
 
 # place here driver.setAcceptUntrustedCertificates(True)
@@ -84,7 +75,7 @@ for strParticipantID in strAllParticipants:
     pw = strParticipantID[2]
 
     # Set possible passwords
-    pwMQ = (strParticipantID[0], strParticipantID[0] + "VIS", strParticipantID[0] + "SS", "FITUI", "ANC")
+    pwMQ = (strParticipantID[0], strParticipantID[0] + "VIS", strParticipantID[0] + "SS")
 
     # Check if files are already present. delete if exists
     strFilePath = strBCQfolderpath + "\\" + strParticipantID[0] + "_METER_DATA_DAILY_null-null.zip"
